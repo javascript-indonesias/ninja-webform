@@ -1,4 +1,10 @@
-# ninja-webform
+# Ninja Webform
+
+Aplikasi sederhana membuat form untuk input login dan sign up dari course Net Ninja Udemy.
+
+Aplikasi cepat cepatan menekan tombol dari latihan course Net Ninja Node JS [https://www.udemy.com/course/build-web-apps-with-vuejs-firebase/](https://www.udemy.com/course/build-web-apps-with-vuejs-firebase/)
+
+[Github Repo Sources](https://github.com/iamshaunjp/Vue-3-Firebase)
 
 ## Project setup
 ```
