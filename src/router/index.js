@@ -4,10 +4,16 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 // which is lazy-loaded when the route is visited.
 const HomeComponent = import(/* webpackChunkName: "home" */ '../views/Home.vue');
 const AboutComponent = import(/* webpackChunkName: "about" */ '../views/About.vue');
+const SignupComponent = import(/* webpackChunkName: "signup" */ '../views/SignupForm.vue');
 
 const routes = [
     {
         path: '/',
+        name: 'SignUp',
+        component: SignupComponent,
+    },
+    {
+        path: '/home',
         name: 'Home',
         component: HomeComponent,
     },

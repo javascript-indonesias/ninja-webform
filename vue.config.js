@@ -8,7 +8,7 @@ module.exports = {
             const argumentwebpack = args;
             argumentwebpack[0].scriptLoading = 'defer';
             argumentwebpack[0].hash = true;
-            argumentwebpack[0].title = 'Vue Reaction Time';
+            argumentwebpack[0].title = 'Vue WebForm';
             return argumentwebpack;
         });
     },
