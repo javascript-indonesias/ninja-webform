@@ -1,10 +1,11 @@
 <template>
-    <form action="">
+    <form action="" @submit.prevent="handleSubmitEvent">
         <label for="emailinput">Email</label>
         <input type="email" required id="emailinput" v-model="stringEmail" />
 
         <label for="passwordinput">Password</label>
         <input type="password" required v-model="stringPassword" id="passwordinput" />
+        <div v-if="passwordError" class="errorclass">{{ passwordError }}</div>
 
         <!-- Select options dengan menggunakan Vue model -->
         <label for="">Role Developer</label>
@@ -27,7 +28,9 @@
         />
 
         <div v-for="skill in listSkills" :key="skill" class="pill">
-            {{ skill }}
+            <span @click="deleteSkill(skill)">
+                {{ skill }}
+            </span>
         </div>
 
         <!-- Menggunakan Checkbox dan multi checkbox -->
@@ -48,6 +51,13 @@
         <div>
             <input type="checkbox" v-model="listAkunCheck" id="namecheckbox" value="free" />
             <label for="namecheckbox">Akun Free</label>
+        </div>
+
+        <!-- Membuat tombol submit kirim -->
+        <div class="submit">
+            <button>
+                Daftarkan Akun
+            </button>
         </div>
     </form>
 
@@ -73,6 +83,7 @@ export default {
             listAkunCheck: [],
             inputSkillTemp: '',
             listSkills: [],
+            passwordError: '',
         };
     },
     methods: {
@@ -87,6 +98,27 @@ export default {
                     this.listSkills.push(this.inputSkillTemp);
                 }
                 this.inputSkillTemp = '';
+            }
+        },
+        deleteSkill(skillItem) {
+            this.listSkills = this.listSkills.filter((item) => {
+                // Jika nilai tidak sama, maka ada di dalam array
+                // Jika nilai sama, maka return false, dan dihilangkan dari array
+                return skillItem !== item;
+            });
+        },
+        handleSubmitEvent() {
+            // validasi password dan kata sandi
+            this.passwordError =
+                this.stringPassword.length > 5 ? '' : 'Panjang kata sandi minimal 5 karakter';
+
+            if (!this.passwordError) {
+                console.log('email', this.stringEmail);
+                console.log('password', this.stringPassword);
+                console.log('role', this.roleProfesi);
+                console.log('skills', this.listSkills);
+                console.log('Pilihan akun', this.listAkunCheck);
+                console.log('terms setuju', this.termsAccept);
             }
         },
     },
@@ -128,5 +160,39 @@ input[type='checkbox'] {
     margin: 0 10px 0 0;
     position: relative;
     top: 4px;
+}
+
+.pill {
+    display: inline-block;
+    margin: 20px 10px 0 0;
+    padding: 6px 12px;
+    background: #eee;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #777;
+    cursor: pointer;
+}
+
+button {
+    background: #0b6dff;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: #fff;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.submit {
+    text-align: center;
+}
+
+.errorclass {
+    color: #ff0062;
+    margin-top: 10px;
+    font-size: 0.8em;
+    font-weight: bold;
 }
 </style>
