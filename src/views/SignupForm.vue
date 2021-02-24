@@ -16,6 +16,20 @@
             <option value="systemanalyst">System Analyst</option>
         </select>
 
+        <!-- Key Event Modifiers -->
+        <label for="inputskill">Keahlian Skill</label>
+        <input
+            type="text"
+            name="inputskill"
+            id="inputskill"
+            v-model="inputSkillTemp"
+            @keyup.alt="addSkillKeahlian"
+        />
+
+        <div v-for="skill in listSkills" :key="skill" class="pill">
+            {{ skill }}
+        </div>
+
         <!-- Menggunakan Checkbox dan multi checkbox -->
         <div class="terms">
             <input type="checkbox" required id="inputcheckbox" v-model="termsAccept" />
@@ -57,11 +71,23 @@ export default {
             roleProfesi: '',
             termsAccept: false,
             listAkunCheck: [],
+            inputSkillTemp: '',
+            listSkills: [],
         };
     },
     methods: {
-        sendEmail() {
-            // send email
+        addSkillKeahlian(event) {
+            // Tambahkan skill setelah diketik koma
+            // Agar koma tidak masuk ke dalam skill, gunakan
+            // event modifier dengan menekan Alt key + comma dulu
+            // baru fungsi ini kembali berjalan
+            if (event.key === ',' && this.inputSkillTemp) {
+                if (!this.listSkills.includes(this.inputSkillTemp)) {
+                    // Tambahkan ke dalam array
+                    this.listSkills.push(this.inputSkillTemp);
+                }
+                this.inputSkillTemp = '';
+            }
         },
     },
 };
